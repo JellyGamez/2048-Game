@@ -1,6 +1,11 @@
 #include <bits/stdc++.h>
-#include <conio.h>
+#ifdef _WIN32
 #include <windows.h>
+#include <conio.h>
+#else
+#include <unistd.h>
+#include <curses.h>
+#endif
 using namespace std;
 int i,j,k,x[4][4],score,highscore,y[4][4],line,column;
 const int dim=4;
@@ -9,6 +14,14 @@ bool gameOver,test,winCondition;
 void controls()
 {
     cout<<"New Game - n\nQuit - q\n\nUp - w\nDown - s\nLeft - a\nRight - d\n\nScore - "<<score<<"\nHighscore - "<<highscore<<"\n\n";
+}
+void sleep(int ms)
+{
+    #ifdef _WIN32
+        Sleep(ms);
+    #else
+        usleep(ms * 1000);
+    #endif
 }
 int digits(int a)
 {
@@ -215,13 +228,13 @@ int main()
     {
         if (!gameOver)
         {
-            system("cls");
+            cout << "\033[2J\033[1;1H";
             controls();
             game();
         }
         else
         {
-            Sleep(2000);
+            sleep(2000);
             gameOver=0;
             newGame();
             continue;
