@@ -1,246 +1,265 @@
 #include <bits/stdc++.h>
+#include <cstdlib>
 #ifdef _WIN32
 #include <windows.h>
 #include <conio.h>
+#define print printf
 #else
 #include <unistd.h>
-#include <curses.h>
+#include <ncurses.h>
+#define print printw
 #endif
 using namespace std;
-int i,j,k,x[4][4],score,highscore,y[4][4],line,column;
-const int dim=4;
+int i, j, k, x[4][4], score, highscore, y[4][4], line, column;
+const int dim = 4;
 char control;
-bool gameOver,test,winCondition;
+bool gameOver, test, winCondition;
 void controls()
 {
-    cout<<"New Game - n\nQuit - q\n\nUp - w\nDown - s\nLeft - a\nRight - d\n\nScore - "<<score<<"\nHighscore - "<<highscore<<"\n\n";
+    print("New Game - n\nQuit - q\n\nUp - w\nDown - s\nLeft - a\nRight - d\n\nScore - %d \nHighscore - %d \n\n", score, highscore);
 }
 void sleep(int ms)
 {
-    #ifdef _WIN32
-        Sleep(ms);
-    #else
-        usleep(ms * 1000);
-    #endif
+#ifdef _WIN32
+    Sleep(ms);
+#else
+    usleep(ms * 1000);
+#endif
+}
+void clearScreen()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    clear();
+#endif
 }
 int digits(int a)
 {
-    int s=0;
+    int s = 0;
     while (a)
     {
         s++;
-        a/=10;
+        a /= 10;
     }
     return s;
 }
 void generateNewPosition()
 {
     srand(time(0));
-    line=rand()%4;
-    column=rand()%4;
+    line = rand() % 4;
+    column = rand() % 4;
     while (x[line][column])
     {
-        line=rand()%4;
-        column=rand()%4;
+        line = rand() % 4;
+        column = rand() % 4;
     }
-    if (rand()%100<90)
-        x[line][column]=2;
+    if (rand() % 100 < 90)
+        x[line][column] = 2;
     else
-        x[line][column]=4;
+        x[line][column] = 4;
 }
 
 void gameOverInstructions()
 {
-    if (score>highscore)
+    if (score > highscore)
     {
-        cout<<"New highscore - "<<score;
-        highscore=score;
+        print("New highscore - %d", score);
+        highscore = score;
     }
     else
-        cout<<"Score - "<<score;
-    score=0;
-    gameOver=1;
+        print("Score - %d", score);
+    score = 0;
+    gameOver = 1;
 }
 void newGame()
 {
-    for (i=0; i<dim; i++)
-        for (j=0; j<dim; j++)
-            x[i][j]=0;
+    for (i = 0; i < dim; i++)
+        for (j = 0; j < dim; j++)
+            x[i][j] = 0;
     generateNewPosition();
     generateNewPosition();
 }
 void game()
 {
-    for (i=0; i<dim; i++)
+    for (i = 0; i < dim; i++)
     {
-        for (j=0; j<dim; j++)
+        for (j = 0; j < dim; j++)
         {
             if (x[i][j])
             {
+                print("%d", x[i][j]);
                 switch (digits(x[i][j]))
                 {
                 case 1:
-                    cout<<x[i][j]<<"    ";
+                    print("    ");
                     break;
                 case 2:
-                    cout<<x[i][j]<<"   ";
+                    print("   ");
                     break;
                 case 3:
-                    cout<<x[i][j]<<"  ";
+                    print("  ");
                     break;
                 case 4:
-                    cout<<x[i][j]<<" ";
+                    print(" ");
                     break;
                 }
+                
             }
             else
-                cout<<".    ";
+                print(".    ");
         }
-        cout<<"\n\n";
+        print("\n\n");
     }
 }
 void gameCopy()
 {
-    for (i=0; i<dim; i++)
-        for (j=0; j<dim; j++)
+    for (i = 0; i < dim; i++)
+        for (j = 0; j < dim; j++)
         {
-            y[i][j]=x[i][j];
-            if (x[i][j]==2048)
-                winCondition=1;
+            y[i][j] = x[i][j];
+            if (x[i][j] == 2048)
+                winCondition = 1;
         }
 }
 void gameTest()
 {
-    for (i=0; i<dim&&!test; i++)
-        for (j=0; j<dim; j++)
-            if (y[i][j]!=x[i][j])
+    for (i = 0; i < dim && !test; i++)
+        for (j = 0; j < dim; j++)
+            if (y[i][j] != x[i][j])
             {
-                test=1;
+                test = 1;
                 break;
             }
 }
 void upLoop()
 {
-    for (j=0; j<dim; j++)
-        for (i=1; i<dim; i++)
+    for (j = 0; j < dim; j++)
+        for (i = 1; i < dim; i++)
             if (x[i][j])
-                for (k=0; k<i; k++)
+                for (k = 0; k < i; k++)
                 {
-                    if (x[k][j]==0)
+                    if (x[k][j] == 0)
                     {
-                        swap (x[k][j],x[i][j]);
+                        swap(x[k][j], x[i][j]);
                         break;
                     }
                 }
 }
 void downLoop()
 {
-    for (j=0; j<dim; j++)
-        for (i=dim-2; i>=0; i--)
+    for (j = 0; j < dim; j++)
+        for (i = dim - 2; i >= 0; i--)
             if (x[i][j])
-                for (k=dim-1; k>i; k--)
-                    if (x[k][j]==0)
+                for (k = dim - 1; k > i; k--)
+                    if (x[k][j] == 0)
                     {
-                        swap (x[k][j],x[i][j]);
+                        swap(x[k][j], x[i][j]);
                         break;
                     }
 }
 void leftLoop()
 {
-    for (i=0; i<dim; i++)
-        for (j=1; j<dim; j++)
+    for (i = 0; i < dim; i++)
+        for (j = 1; j < dim; j++)
             if (x[i][j])
-                for (k=0; k<j; k++)
-                    if (x[i][k]==0)
+                for (k = 0; k < j; k++)
+                    if (x[i][k] == 0)
                     {
-                        swap (x[i][k],x[i][j]);
+                        swap(x[i][k], x[i][j]);
                         break;
                     }
 }
 void rightLoop()
 {
-    for (i=0; i<dim; i++)
-        for (j=dim-2; j>=0; j--)
+    for (i = 0; i < dim; i++)
+        for (j = dim - 2; j >= 0; j--)
             if (x[i][j])
-                for (k=dim-1; k>j; k--)
-                    if (x[i][k]==0)
+                for (k = dim - 1; k > j; k--)
+                    if (x[i][k] == 0)
                     {
-                        swap (x[i][k],x[i][j]);
+                        swap(x[i][k], x[i][j]);
                         break;
                     }
 }
 void up()
 {
     upLoop();
-    for (j=0; j<dim; j++)
-        for (i=1; i<dim; i++)
-            if (x[i][j]==x[i-1][j]&&x[i-1][j])
+    for (j = 0; j < dim; j++)
+        for (i = 1; i < dim; i++)
+            if (x[i][j] == x[i - 1][j] && x[i - 1][j])
             {
-                x[i-1][j]*=2;
-                score+=x[i-1][j];
-                x[i][j]=0;
+                x[i - 1][j] *= 2;
+                score += x[i - 1][j];
+                x[i][j] = 0;
             }
     upLoop();
 }
 void down()
 {
     downLoop();
-    for (j=0; j<dim; j++)
-        for (i=dim-2; i>=0; i--)
-            if (x[i][j]==x[i+1][j]&&x[i+1][j])
+    for (j = 0; j < dim; j++)
+        for (i = dim - 2; i >= 0; i--)
+            if (x[i][j] == x[i + 1][j] && x[i + 1][j])
             {
-                x[i+1][j]*=2;
-                score+=x[i+1][j];
-                x[i][j]=0;
+                x[i + 1][j] *= 2;
+                score += x[i + 1][j];
+                x[i][j] = 0;
             }
     downLoop();
 }
 void left()
 {
     leftLoop();
-    for (i=0; i<dim; i++)
-        for (j=1; j<dim; j++)
-            if (x[i][j]==x[i][j-1]&&x[i][j-1])
+    for (i = 0; i < dim; i++)
+        for (j = 1; j < dim; j++)
+            if (x[i][j] == x[i][j - 1] && x[i][j - 1])
             {
-                x[i][j-1]*=2;
-                score+=x[i][j-1];
-                x[i][j]=0;
+                x[i][j - 1] *= 2;
+                score += x[i][j - 1];
+                x[i][j] = 0;
             }
     leftLoop();
 }
 void right()
 {
     rightLoop();
-    for (i=0; i<dim; i++)
-        for (j=dim-2; j>=0; j--)
-            if (x[i][j]==x[i][j+1]&&x[i][j+1])
+    for (i = 0; i < dim; i++)
+        for (j = dim - 2; j >= 0; j--)
+            if (x[i][j] == x[i][j + 1] && x[i][j + 1])
             {
-                x[i][j+1]*=2;
-                score+=x[i][j+1];
-                x[i][j]=0;
+                x[i][j + 1] *= 2;
+                score += x[i][j + 1];
+                x[i][j] = 0;
             }
     rightLoop();
 }
 int main()
 {
+    #ifndef _WIN32
+        initscr();
+        raw();
+        keypad(stdscr, TRUE);
+        noecho();
+    #endif
     newGame();
     while (1)
     {
         if (!gameOver)
         {
-            cout << "\033[2J\033[1;1H";
+            clearScreen();
             controls();
             game();
         }
         else
         {
             sleep(2000);
-            gameOver=0;
+            gameOver = 0;
             newGame();
             continue;
         }
         gameCopy();
-        test=0;
+        test = 0;
         switch (getch())
         {
         case 'q':
@@ -266,30 +285,33 @@ int main()
             generateNewPosition();
         else
         {
-            bool f=0;
-            for (i=0; i<dim&&!f; i++)
-                for (j=0; j<dim; j++)
+            bool f = 0;
+            for (i = 0; i < dim && !f; i++)
+                for (j = 0; j < dim; j++)
                 {
-                    int pos=x[i][j];
-                    if (!pos||(pos==x[i+1][j]&&i+1<dim)||(pos==x[i-1][j]&&i-1>=0)||(pos==x[i][j+1]&&j+1<dim)||(pos==x[i][j-1]&&j-1>=0))
+                    int pos = x[i][j];
+                    if (!pos || (pos == x[i + 1][j] && i + 1 < dim) || (pos == x[i - 1][j] && i - 1 >= 0) || (pos == x[i][j + 1] && j + 1 < dim) || (pos == x[i][j - 1] && j - 1 >= 0))
                     {
-                        f=1;
+                        f = 1;
                         break;
                     }
                 }
             if (!f)
             {
-                cout<<"\nGame Over!\n";
+                print("\nGame Over!\n");
                 gameOverInstructions();
                 continue;
             }
         }
         if (winCondition)
         {
-            winCondition=0;
-            cout<<"\nYon won!\n";
+            winCondition = 0;
+            print("\nYon won!\n");
             gameOverInstructions();
         }
     }
+    #ifndef _WIN32
+    endwin();
+    #endif
     return 0;
 }
