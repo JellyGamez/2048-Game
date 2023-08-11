@@ -1,13 +1,13 @@
 ifeq ($(OS), Windows_NT)
-	EXECUTABLE=2048.exe
+	EXECUTABLE=main.exe
 else
-	EXECUTABLE=2048.out
+	EXECUTABLE=main.out
 endif
 
 
 $(EXECUTABLE): 2048.cpp
 ifeq ($(OS), Windows_NT)
-	g++ 2048.cpp
+	g++ main.cpp
 else
-	g++ 2048.cpp -lncurses
+	g++ main.cpp -lncurses
 endif
