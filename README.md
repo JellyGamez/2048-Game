@@ -7,3 +7,14 @@
 
 ## Todo
 - [ ]  Add makefile
+
+## Project setup
+- Windows
+
+`g++ main.cpp`
+
+- Linux
+
+`sudo apt-get install ncurses-dev`
+
+`g++ main.cpp -lncurses`
