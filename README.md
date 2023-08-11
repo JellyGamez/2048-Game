@@ -5,9 +5,6 @@
 - Keeping track of the current score and highscore
 - Options to start a new game or quit
 
-## Todo
-- [ ]  Add makefile
-
 ## Project setup
 - Windows
 
