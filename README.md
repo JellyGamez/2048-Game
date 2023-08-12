@@ -8,10 +8,16 @@
 ## Project setup
 - Windows
 
-`g++ main.cpp`
+```sh
+g++ main.cpp
+```
 
 - Linux
 
-`sudo apt-get install ncurses-dev`
+```sh
+sudo apt-get install ncurses-dev
+```
 
-`g++ main.cpp -lncurses`
+```sh 
+g++ main.cpp -lncurses
+```
