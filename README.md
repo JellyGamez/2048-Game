@@ -16,8 +16,5 @@ g++ main.cpp
 
 ```sh
 sudo apt-get install ncurses-dev
-```
-
-```sh 
 g++ main.cpp -lncurses
 ```
