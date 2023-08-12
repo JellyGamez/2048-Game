@@ -3,6 +3,8 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <conio.h>
+#define refresh()
+#define endwin()
 #define print printf
 #else
 #include <unistd.h>
@@ -71,6 +73,7 @@ void gameOverInstructions()
         print("Score - %d", score);
     score = 0;
     gameOver = 1;
+    refresh();
 }
 void newGame()
 {
@@ -104,7 +107,6 @@ void game()
                     print(" ");
                     break;
                 }
-                
             }
             else
                 print(".    ");
@@ -236,12 +238,12 @@ void right()
 }
 int main()
 {
-    #ifndef _WIN32
-        initscr();
-        raw();
-        keypad(stdscr, TRUE);
-        noecho();
-    #endif
+#ifndef _WIN32
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+    noecho();
+#endif
     newGame();
     while (1)
     {
@@ -263,6 +265,7 @@ int main()
         switch (getch())
         {
         case 'q':
+            endwin();
             return 0;
         case 'n':
             newGame();
@@ -299,6 +302,7 @@ int main()
             if (!f)
             {
                 print("\nGame Over!\n");
+                refresh();
                 gameOverInstructions();
                 continue;
             }
@@ -307,11 +311,10 @@ int main()
         {
             winCondition = 0;
             print("\nYon won!\n");
+            refresh();
             gameOverInstructions();
         }
     }
-    #ifndef _WIN32
     endwin();
-    #endif
     return 0;
 }
