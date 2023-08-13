@@ -10,12 +10,14 @@ The classic 2048 game written in C++. This was my second project and I might hav
 - Windows
 
 ```sh
-g++ main.cpp
+g++ main.cpp -o main
+./main
 ```
 
 - Linux
 
 ```sh
 sudo apt-get install ncurses-dev
-g++ main.cpp -lncurses
+g++ main.cpp -lncurses -o main
+./main
 ```
