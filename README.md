@@ -1,5 +1,5 @@
 # 2048 Game
- The 2048 game written in C++. My second project ever made (may need some refactoring)
+The classic 2048 game written in C++. This was my second project and I might have some refactoring to consider, but this endeavor reflects the progress I've made since my early days of programming.
  
 ## Features
 - Move the tiles using **W A S D**
