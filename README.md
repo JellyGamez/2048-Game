@@ -3,21 +3,41 @@ The classic 2048 game written in C++. This was my second project and I might hav
  
 ## Features
 - Move the tiles using **W A S D**
-- Keeping track of the current score and highscore
+- Monitor your current score and highscore
 - Options to start a new game or quit
 
-## Project setup
-- Windows
+
+## Getting started
+
+### 1. Clone the project
 
 ```sh
-g++ main.cpp -o main
-./main
+  git clone https://github.com/JellyGamez/2048.git
+```
+
+### 2. Go to the project directory
+
+```sh
+  cd 2048
+```
+
+### 3. Compile
+
+- Windows
+```sh
+  g++ main.cpp -o main
 ```
 
 - Linux
 
+The linux version makes use of an external library you need to install:
 ```sh
-sudo apt-get install ncurses-dev
-g++ main.cpp -lncurses -o main
+  sudo apt-get install ncurses-dev
+  g++ main.cpp -lncurses -o main
+```
+
+### 4. Launch the game
+
+```sh
 ./main
 ```
