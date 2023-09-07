@@ -12,28 +12,28 @@ The classic 2048 game written in C++. This was my second project and I might hav
 ### 1. Clone the project
 
 ```sh
-  git clone https://github.com/JellyGamez/2048.git
+git clone https://github.com/JellyGamez/2048.git
 ```
 
 ### 2. Go to the project directory
 
 ```sh
-  cd 2048
+cd 2048
 ```
 
 ### 3. Compile
 
 - Windows
 ```sh
-  g++ main.cpp -o main
+g++ main.cpp -o main
 ```
 
 - Linux
 
 The linux version makes use of an external library you need to install:
 ```sh
-  sudo apt-get install ncurses-dev
-  g++ main.cpp -lncurses -o main
+sudo apt-get install ncurses-dev
+g++ main.cpp -lncurses -o main
 ```
 
 ### 4. Launch the game
