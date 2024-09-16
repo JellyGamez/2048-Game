@@ -6,8 +6,7 @@ The classic 2048 game written in C++. This was my second project and I might hav
 - Monitor your current score and highscore
 - Options to start a new game or quit
 
-
-## Getting started
+## Quick Start
 
 ### 1. Clone the project
 
@@ -41,3 +40,6 @@ g++ main.cpp -lncurses -o main
 ```sh
 ./main
 ```
+
+## Note
+The default terminal window may be too small, so make sure to resize it to fit the whole board and menu.
