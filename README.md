@@ -20,22 +20,19 @@ git clone https://github.com/JellyGamez/2048.git
 cd 2048
 ```
 
-### 3. Compile
+### 3. Install dependencies (Linux only)
 
-- Windows
-```sh
-g++ main.cpp -o main
-```
-
-- Linux
-
-The linux version makes use of an external library you need to install:
 ```sh
 sudo apt-get install ncurses-dev
-g++ main.cpp -lncurses -o main
 ```
 
-### 4. Launch the game
+### 4. Compile
+
+```sh
+make
+```
+
+### 5. Launch the game
 
 ```sh
 ./main
