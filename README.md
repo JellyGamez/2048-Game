@@ -4,7 +4,7 @@
 
 The classic 2048 game written in C++. This was my second project and I might have some refactoring to consider, but this endeavor reflects the progress I've made since my early days of programming.
  
-## ⭐ Features
+## 🛠️ Features
 - Move the tiles using **W A S D**
 - Monitor your current score and highscore
 - Options to start a new game or quit
