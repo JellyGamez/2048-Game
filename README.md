@@ -1,6 +1,7 @@
 <h1 align="center">
   2048
 </h1>
+
 The classic 2048 game written in C++. This was my second project and I might have some refactoring to consider, but this endeavor reflects the progress I've made since my early days of programming.
  
 ## ⭐ Features
