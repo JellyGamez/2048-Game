@@ -1,8 +1,13 @@
 <h1 align="center">
   2048
 </h1>
+<div align="center">
 
+  ![image](https://github.com/user-attachments/assets/6c8baf20-49f9-47ff-8430-cae5a19fb6ae)
+
+</div>
 The classic 2048 game written in C++. This was my second project and I might have some refactoring to consider, but this endeavor reflects the progress I've made since my early days of programming.
+
  
 ## 🛠️ Features
 - Move the tiles using **W A S D**
