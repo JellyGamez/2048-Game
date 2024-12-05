@@ -42,5 +42,5 @@ make
 ./main
 ```
 
-## ⚠️ Note
+## 📋 Note
 The default terminal window may be too small, so make sure to resize it to fit the whole board and menu.
