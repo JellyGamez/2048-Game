@@ -18,7 +18,7 @@ char control;
 bool gameOver, test, winCondition;
 void controls()
 {
-    print("New Game - n\nQuit - q\n\nUp - w\nDown - s\nLeft - a\nRight - d\n\nScore - %d \nHighscore - %d \n\n", score, highscore);
+    print("\n\n    New Game - n\n    Quit - q\n\n    Score - %d \n    Highscore - %d \n\n", score, highscore);
 }
 void sleep(int ms)
 {
@@ -66,11 +66,24 @@ void gameOverInstructions()
 {
     if (score > highscore)
     {
-        print("New highscore - %d", score);
+        print("    New highscore - %d", score);
         highscore = score;
     }
     else
-        print("Score - %d", score);
+        print("    Score - %d", score);
+
+    print("\n    Starting new game");
+    refresh();
+    gameOver = 0;
+
+    sleep(500);
+    for (int i = 0; i < 3; i++)
+    {
+        print(".");
+        refresh();
+        sleep(500);
+    }
+
     score = 0;
     gameOver = 1;
     refresh();
@@ -87,6 +100,7 @@ void game()
 {
     for (i = 0; i < dim; i++)
     {
+        print("    ");
         for (j = 0; j < dim; j++)
         {
             if (x[i][j])
@@ -255,7 +269,6 @@ int main()
         }
         else
         {
-            sleep(2000);
             gameOver = 0;
             newGame();
             continue;
@@ -269,6 +282,8 @@ int main()
             return 0;
         case 'n':
             newGame();
+            refresh();
+            gameOverInstructions();
             continue;
         case 'w':
             up();
@@ -301,7 +316,7 @@ int main()
                 }
             if (!f)
             {
-                print("\nGame Over!\n");
+                print("\n    Game Over!\n");
                 refresh();
                 gameOverInstructions();
                 continue;
@@ -310,7 +325,7 @@ int main()
         if (winCondition)
         {
             winCondition = 0;
-            print("\nYon won!\n");
+            print("\n    Yon won!\n");
             refresh();
             gameOverInstructions();
         }
